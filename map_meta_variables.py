@@ -236,9 +236,12 @@ for variable, info in variables.items():
 			action_info['increment'] = inc
 			inc += info['increment']
 			if action in "NoAction" or action_info['default']:
-				tables[table]['actions'][action1] = tables[table]['actions'][action] 
-				tables[table]['actions'][action] = action_info
-		info['increment'] *= len(done)
+				if action1 in "NoAction":
+					continue
+				print (action)
+				tables[table]['actions'][action1]['increment'] = tables[table]['actions'][action]['increment']
+				action_info['increment'] = 0
+		info['increment'] *= len(tables[table]['actions'])
 
 sum = 0
 for table, table_actions in tables.items():
